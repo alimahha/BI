@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: modeleCustomer
+    description: "Clients avec nom complet et prénom en majuscules"
+    columns:
+      - name: customerid
+        description: "Identifiant du client"
+        tests:
+          - unique
+          - not_null
