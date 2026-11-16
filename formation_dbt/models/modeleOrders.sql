@@ -6,4 +6,4 @@ SELECT *,
         WHEN '02' THEN 'Terminée'
         WHEN '03' THEN 'Annulée'
     END AS StatusDescription
-From bronze.orders
+FROM {{ source('bronze', 'orders') }}
