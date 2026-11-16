@@ -1,5 +1,3 @@
-{{ config(materialized='view', schema='silver') }}
-
 SELECT
     *,
     CONCAT(firstname, ' ', lastname) AS fullname,

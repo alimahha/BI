@@ -1,5 +1,3 @@
-{{ config(materialized='table', schema='gold') }}
-
 -- Montant total de chaque commande (somme des lignes)
 WITH order_totals AS (
     SELECT

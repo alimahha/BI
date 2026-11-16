@@ -1,5 +1,3 @@
-{{ config(materialized='table', schema='gold') }}
-
 -- Nombre de commandes et revenu par client (tous employés / magasins / statuts confondus)
 WITH orders_by_customer AS (
     SELECT

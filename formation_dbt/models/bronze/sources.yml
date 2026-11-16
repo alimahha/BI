@@ -1,0 +1,72 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Données brutes chargées depuis le système source, sans transformation"
+    schema: bronze
+    tables:
+      - name: customers
+        description: "Clients : une ligne par client"
+        columns:
+          - name: customerid
+            description: "Identifiant unique du client"
+            tests:
+              - unique
+              - not_null
+          - name: firstname
+            description: "Prénom"
+          - name: lastname
+            description: "Nom de famille"
+          - name: email
+            description: "Adresse e-mail"
+          - name: phone
+            description: "Numéro de téléphone"
+          - name: address
+            description: "Adresse postale"
+          - name: city
+            description: "Ville"
+          - name: state
+            description: "État / région"
+          - name: zipcode
+            description: "Code postal"
+          - name: updated_at
+            description: "Date de dernière mise à jour de la ligne"
+
+      - name: orders
+        description: "Commandes : une ligne par commande"
+        columns:
+          - name: orderid
+            description: "Identifiant unique de la commande"
+            tests:
+              - unique
+              - not_null
+          - name: orderdate
+            description: "Date de la commande"
+          - name: customerid
+            description: "Client ayant passé la commande"
+          - name: employeeid
+            description: "Employé ayant traité la commande"
+          - name: storeid
+            description: "Magasin où la commande a été passée"
+          - name: status
+            description: "Statut : 01 = En cours, 02 = Terminée, 03 = Annulée"
+          - name: updated_at
+            description: "Date de dernière mise à jour de la ligne"
+
+      - name: orderitems
+        description: "Lignes de commande : une ligne par produit d'une commande"
+        columns:
+          - name: orderid
+            description: "Commande à laquelle appartient la ligne"
+            tests:
+              - not_null
+          - name: orderitemid
+            description: "Numéro de la ligne dans la commande"
+          - name: productid
+            description: "Produit commandé"
+          - name: quantity
+            description: "Quantité commandée"
+          - name: unitprice
+            description: "Prix unitaire"
+          - name: updated_at
+            description: "Date de dernière mise à jour de la ligne"

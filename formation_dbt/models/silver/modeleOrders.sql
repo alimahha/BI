@@ -1,5 +1,3 @@
-{{ config(materialized='view', schema='silver') }}
-
 SELECT *,
     CASE status
         WHEN '01' THEN 'En cours'
