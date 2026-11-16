@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "Nombre et montant des commandes par client, employé, magasin et statut"
+    columns:
+      - name: customerid
+        tests:
+          - not_null
+      - name: employeeid
+        tests:
+          - not_null
+      - name: storeid
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['01', '02', '03']
+      - name: nb_orders
+        tests:
+          - not_null
+      - name: total_amount
+        tests:
+          - not_null
+
+  - name: customer_revenue
+    description: "Nombre de commandes et revenu généré par client, avec son nom complet"
+    columns:
+      - name: customerid
+        tests:
+          - unique
+          - not_null
+      - name: fullname
+        tests:
+          - not_null
+      - name: nb_orders
+        tests:
+          - not_null
+      - name: revenue
+        tests:
+          - not_null
