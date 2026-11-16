@@ -41,3 +41,17 @@ models:
       - name: revenue
         tests:
           - not_null
+
+  - name: store_performance
+    description: "Revenu réel et objectif de ventes par magasin"
+    columns:
+      - name: storeid
+        tests:
+          - unique
+          - not_null
+      - name: revenue
+        tests:
+          - not_null
+      - name: sales_target
+        tests:
+          - not_null
