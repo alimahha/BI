@@ -1,6 +1,33 @@
 version: 2
 
 sources:
+  - name: training
+    description: "Données de ventes d'exemple par pays, chargées depuis training.sql"
+    schema: TRAINING
+    tables:
+      - name: sales_india
+        description: "Ventes journalières en Inde"
+        columns: &sales_columns
+          - name: sales_date
+            description: "Date de la vente"
+            tests:
+              - not_null
+              - unique
+          - name: quantity_sold
+            description: "Quantité vendue dans la journée"
+          - name: unit_sell_price
+            description: "Prix de vente unitaire"
+          - name: unit_purchase_cost
+            description: "Coût d'achat unitaire"
+
+      - name: sales_uk
+        description: "Ventes journalières au Royaume-Uni"
+        columns: *sales_columns
+
+      - name: sales_us
+        description: "Ventes journalières aux États-Unis"
+        columns: *sales_columns
+
   - name: bronze
     description: "Données brutes chargées depuis le système source, sans transformation"
     schema: bronze
@@ -70,3 +97,15 @@ sources:
             description: "Prix unitaire"
           - name: updated_at
             description: "Date de dernière mise à jour de la ligne"
+
+  # Tables gold produites par dbt : dans les modèles, utiliser ref(), pas source()
+  - name: gold
+    description: "Données agrégées prêtes pour l'analyse, construites par les modèles de models/gold/"
+    schema: gold
+    tables:
+      - name: fact_orders
+        description: "Nombre et montant des commandes par client, employé, magasin et statut"
+      - name: customer_revenue
+        description: "Nombre de commandes et revenu par client, avec son nom complet"
+      - name: store_performance
+        description: "Revenu réel, objectif, écart et taux d'atteinte par magasin"

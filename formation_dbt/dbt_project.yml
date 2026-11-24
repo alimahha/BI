@@ -29,13 +29,22 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+vars:
+  eur_rate_us: 0.8906      
+  eur_rate_uk: 1.1777       
+  eur_rate_india: 0.00926
+
 models:
   formation_dbt:
-    # models/silver/ : données nettoyées, en vues dans le schéma silver
+    bronze:
+      +schema: bronze
+      +materialized: view
     silver:
       +schema: silver
       +materialized: view
-    # models/gold/ : données agrégées, en tables dans le schéma gold
     gold:
       +schema: gold
+      +materialized: table
+    training:
+      +schema: TRAINING
       +materialized: table
